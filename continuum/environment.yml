@@ -8,4 +8,4 @@ dependencies:
 - pyiron_gpl =0.0.5
 - pyvista =0.43.6
 - sqsgenerator =0.3
-- vtk =9.2.6
+- vtk =9.3.1
