@@ -12,7 +12,7 @@ dependencies:
 - pyiron_workflow =0.11.0
 - pyiron_gui =0.0.12
 - matgl =1.1.2
-- mlip =2.0
+- mlip =3.0
 - sqsgenerator =0.3
 - pyiron_gpl =0.0.5
 - python-ace =0.3.0
