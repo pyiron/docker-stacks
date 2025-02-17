@@ -16,6 +16,7 @@ jobs:
           tail --lines=+5 base/environment.yml >> environment.yml
           tail --lines=+5 md/environment.yml >> environment.yml
           tail --lines=+5 pyiron/environment.yml >> environment.yml
+          cat environment.yml
       - name: Setup Mambaforge
         uses: conda-incubator/setup-miniconda@v3
         with:
