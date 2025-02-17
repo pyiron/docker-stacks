@@ -5,6 +5,18 @@ on:
     branches: [ main ]
 
 jobs:
+  pip_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Environment File
+        run: |
+          cp mpie_cmti/environment.yml environment.yml
+          tail --lines=+5 base/environment.yml >> environment.yml
+          tail --lines=+5 md/environment.yml >> environment.yml
+          tail --lines=+5 pyiron/environment.yml >> environment.yml
+        
+
   build:
     runs-on: ubuntu-latest
     steps:
