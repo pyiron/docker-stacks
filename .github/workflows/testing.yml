@@ -5,7 +5,34 @@ on:
     branches: [ main ]
 
 jobs:
+  pip_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Environment File
+        run: |
+          echo -e "channels:\n  - conda-forge\n" > .condarc
+          cp mpie_cmti/environment.yml environment.yml
+          tail --lines=+5 base/environment.yml >> environment.yml
+          tail --lines=+5 md/environment.yml >> environment.yml
+          tail --lines=+5 pyiron/environment.yml >> environment.yml
+          cat environment.yml
+      - name: Setup Mambaforge
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: "3.11"
+          miniforge-version: latest
+          condarc-file: .condarc
+          environment-file: environment.yml
+      - name: Test
+        shell: bash -l {0}
+        timeout-minutes: 30
+        run: |
+          pip install ./.ci_support --no-deps --no-build-isolation
+          pip check
+
   build:
+    needs: [pip_check]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -82,6 +109,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
+      - name: Ignore broken packages
+        shell: bash -l {0}
+        run: python .ci_support/checktitle.py "${{ github.event.pull_request.title }}"
       - name: Enable auto-merge for bot PRs
         run: gh pr merge --auto --squash "$PR_URL"
         env:
