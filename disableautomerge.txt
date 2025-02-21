@@ -1,0 +1,15 @@
+damask
+fenics
+hyperspy
+pyiron-continuum
+pyiron-experimental
+pyiron_experimental
+pystem
+python-ace
+pytorch
+pyvista
+pyxem
+scanf
+temmeta
+vtk
+nglview
