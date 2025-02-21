@@ -35,6 +35,9 @@ jobs:
     needs: [pip_check]
     runs-on: ubuntu-latest
     steps:
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
       - name: Build pyiron/base
         timeout-minutes: 5
@@ -96,10 +99,14 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: environment/*.yml
-          key: all_env_$(date +%F)
+          key: all_env_-${{ steps.get-date.outputs.date }}
   build_cmti:
+    needs: [pip_check]
     runs-on: ubuntu-latest
     steps:
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
       - name: Build pyiron/mpie_cmti
         timeout-minutes: 15
@@ -113,12 +120,11 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: environment/*.yml
-          key: cmti_env_$(date +%F)
+          key: cmti_env_-${{ steps.get-date.outputs.date }}
   check:
     needs: [build, build_cmti]
     runs-on: ubuntu-latest
     steps:
-      - run: ls -al environment
       - name: Get current date
         id: date
         run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
@@ -126,12 +132,12 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: environment/*.yml
-          key: cmti_env_$(date +%F)
+          key: cmti_env_-${{ steps.get-date.outputs.date }}
       - name: cache
         uses: actions/cache/restore@v4
         with:
           path: environment/*.yml
-          key: all_env_$(date +%F)
+          key: all_env_-${{ steps.get-date.outputs.date }}
       - run: ls -al environment
 
   autobot:
