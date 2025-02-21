@@ -46,3 +46,5 @@ In case you want to keep data you worked on/created while using the container, i
 ```bash
 docker run -i -t  -v <local_path>:/home/jovyan/ -p 8888:8888 <image_name> /bin/bash -c "source /opt/conda/bin/activate; jupyter notebook --notebook-dir=/home/jovyan/ --ip='*' --port=8888"
 ```
+
+
