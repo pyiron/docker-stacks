@@ -65,7 +65,11 @@ jobs:
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/pyiron /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_pyiron_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/potentialworkshop /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_potentialworkshop_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/experimental /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_experimental_$(date +%F).yml;'
-      - run: ls -al environment
+      - name: cache
+        uses: actions/cache/save@v4
+        with:
+          path: environment/*.yml
+          key: all_env_$(date +%F)
   build_cmti:
     runs-on: ubuntu-latest
     steps:
@@ -78,6 +82,29 @@ jobs:
       - run: docker images
       - run: mkdir -p environment; chmod 777 environment
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/mpie_cmti /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/mpie_cmti_$(date +%F).yml;'
+      - name: cache
+        uses: actions/cache/save@v4
+        with:
+          path: environment/*.yml
+          key: cmti_env_$(date +%F)
+  check:
+    needs: [build, build_cmti]
+    runs-on: ubuntu-latest
+    steps:
+      - run: ls -al environment
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
+      - name: cache_cmti
+        uses: actions/cache/restore@v4
+        with:
+          path: environment/*.yml
+          key: cmti_env_$(date +%F)
+      - name: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: environment/*.yml
+          key: all_env_$(date +%F)
       - run: ls -al environment
 
   autobot:
