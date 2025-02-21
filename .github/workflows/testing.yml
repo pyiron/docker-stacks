@@ -99,7 +99,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: environment/*.yml
-          key: all_env_-${{ steps.get-date.outputs.date }}
+          key: all_env_-${{ steps.date.outputs.date }}
   build_cmti:
     needs: [pip_check]
     runs-on: ubuntu-latest
@@ -120,7 +120,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: environment/*.yml
-          key: cmti_env_-${{ steps.get-date.outputs.date }}
+          key: cmti_env_-${{ steps.date.outputs.date }}
   check:
     needs: [build, build_cmti]
     runs-on: ubuntu-latest
@@ -132,12 +132,12 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: environment/*.yml
-          key: cmti_env_-${{ steps.get-date.outputs.date }}
+          key: cmti_env_-${{ steps.date.outputs.date }}
       - name: cache
         uses: actions/cache/restore@v4
         with:
           path: environment/*.yml
-          key: all_env_-${{ steps.get-date.outputs.date }}
+          key: all_env_-${{ steps.date.outputs.date }}
       - run: ls -al environment
 
   autobot:
