@@ -7,7 +7,7 @@ pyiron_experimental==0.0.3
 pyiron_workflow==0.12.0
 pyiron-gpl==0.0.5
 pyiron_potentialfit==0.3.8
-pyironflow==0.0.5
+pyironflow==0.0.9
 aimsgb==1.1.1
 calphy==1.3.13
 damask==3.0.0
