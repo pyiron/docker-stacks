@@ -116,7 +116,6 @@ jobs:
     needs: [build, build_cmti]
     runs-on: ubuntu-latest
     steps:
-      - run: ls -al environment
       - name: Get current date
         id: date
         run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
@@ -130,6 +129,7 @@ jobs:
         with:
           path: environment/*.yml
           key: all_env_${{ steps.date.outputs.date }}$
+      - run: ls -al environment
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
