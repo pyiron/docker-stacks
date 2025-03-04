@@ -94,7 +94,7 @@ jobs:
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Build pyiron/mpie_cmti
-        timeout-minutes: 5
+        timeout-minutes: 10
         run: |
           tail --lines=+5 pyiron/environment.yml >> mpie_cmti/environment.yml
           docker build -t pyiron/mpie_cmti:latest mpie_cmti/
