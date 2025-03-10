@@ -3,10 +3,10 @@ pyiron-base==0.11.5
 pyiron-atomistics==0.6.25
 pyiron-continuum==0.0.8
 pyiron-contrib==0.1.18
-pyiron_experimental==0.0.3
-pyiron_workflow==0.12.0
+pyiron-experimental==0.0.3
+pyiron-workflow==0.12.0
 pyiron-gpl==0.0.5
-pyiron_potentialfit==0.3.8
+pyiron-potentialfit==0.3.8
 pyironflow==0.0.9
 aimsgb==1.1.1
 calphy==1.3.13
