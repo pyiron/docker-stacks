@@ -148,6 +148,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
+      - uses: actions/checkout@v4
       - name: Ignore broken packages
         shell: bash -l {0}
         run: python .ci_support/checktitle.py "${{ github.event.pull_request.title }}"
