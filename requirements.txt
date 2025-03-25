@@ -33,3 +33,4 @@ llama-index==0.12.25
 netcdf4==1.7.1
 maxvolpy==0.3.8
 bokeh==3.6.3
+dscribe==2.1.1
