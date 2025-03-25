@@ -43,3 +43,4 @@ dependencies:
 - sqsgenerator =0.3
 - structdbrest =0.0.1
 - tensorflow =2.17.0
+- dscribe =2.1.1
