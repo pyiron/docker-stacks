@@ -27,14 +27,14 @@ dependencies:
 - psycopg2 =2.9.9
 - pyiron =0.5.2
 - pyiron-data =0.0.30
-- pyiron_atomistics =0.7.3
+- pyiron_atomistics =0.7.5
 - pyiron_base =0.11.11
 - pyiron_contrib =0.1.18
 - pyiron_potentialfit =0.3.8
-- pyiron_workflow =0.12.2
+- pyiron_workflow =0.12.3
 - pyiron_gui =0.0.12
 - pyiron_gpl =0.0.5
-- pyironflow =0.0.16
+- pyironflow =0.0.17
 - python-ace =0.3.0
 - pytorch =2.1.2
 - pyxtal =1.0.7
