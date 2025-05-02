@@ -34,4 +34,4 @@ netcdf4==1.7.1
 maxvolpy==0.3.8
 bokeh==3.7.2
 dscribe==2.1.1
-landaupkg==1.2.3
+landaupkg==1.3.0
