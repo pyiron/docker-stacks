@@ -5,7 +5,7 @@ dependencies:
 - aimsgb =1.1.1
 - atomicrex =1.0.4
 - bader =1.0.5
-- bokeh =3.7.2
+- bokeh =3.7.3
 - calphy =1.4.2
 - fitsnap3 =3.1.0.4
 - flux-core =0.64.0
