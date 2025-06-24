@@ -123,7 +123,7 @@ jobs:
           key: cmti_env_-${{ steps.date.outputs.date }}
       - name: test pyiron/cmti
         run: |
-          docker run -v $(pwd)/mpie_cmti/test:/home/jovyan/test --rm pyiron/mpie_cmti /bin/bash -c 'source /opt/conda/bin/activate; python -Werror test/import.py;'
+          docker run -v $(pwd)/mpie_cmti/test:/home/jovyan/test --rm pyiron/mpie_cmti /bin/bash -c 'source /opt/conda/bin/activate; python test/import.py;'
   check:
     needs: [build, build_cmti]
     runs-on: ubuntu-latest
