@@ -18,7 +18,7 @@ dependencies:
 - matgl =1.1.2
 - maxvolpy =0.3.8
 - nbgitpuller =1.2.2
-- netcdf4 =1.7.1
+- netcdf4 =1.7.2
 - nglview =3.1.4
 - mkl =2023.2.0
 - mlip =2.0
