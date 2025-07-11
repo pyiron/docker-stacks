@@ -9,7 +9,7 @@ pyiron-potentialfit==0.3.11
 pyironflow==0.0.20
 aimsgb==1.1.1
 calphy==1.4.2
-damask==3.0.0
+damask==3.0.2
 fenics==2019.1.0
 gpaw==24.6.0
 hyperspy==2.2.0
