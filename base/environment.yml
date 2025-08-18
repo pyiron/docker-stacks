@@ -2,6 +2,6 @@ channels:
 - conda-forge
 - nodefaults
 dependencies:
-- pyiron_base =0.13.5
+- pyiron_base =0.14.0
 - git =2.46.0
 - mkl =2023.2.0
