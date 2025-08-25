@@ -28,7 +28,7 @@ temmeta==0.0.6
 vtk==9.2.6
 pytorch==2.1.2
 tensorflow==2.17.0
-llama-index==0.13.2
+llama-index==0.13.3
 netcdf4==1.7.2
 maxvolpy==0.3.8
 bokeh==3.7.3
