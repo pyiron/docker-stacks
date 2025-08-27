@@ -27,7 +27,7 @@ dependencies:
 - psycopg2 =2.9.9
 - pyiron =0.5.2
 - pyiron-data =0.0.30
-- pyiron_atomistics =0.7.15
+- pyiron_atomistics =0.7.16
 - pyiron_base =0.14.0
 - pyiron_contrib =0.1.19
 - pyiron_potentialfit =0.3.11
