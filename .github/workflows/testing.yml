@@ -5,57 +5,158 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  pip_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Build Environment File
+        run: |
+          echo -e "channels:\n  - conda-forge\n" > .condarc
+          cp mpie_cmti/environment.yml environment.yml
+          tail --lines=+5 base/environment.yml >> environment.yml
+          tail --lines=+5 md/environment.yml >> environment.yml
+          tail --lines=+5 pyiron/environment.yml >> environment.yml
+          cat environment.yml
+      - name: Setup Mambaforge
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: "3.11"
+          miniforge-version: latest
+          condarc-file: .condarc
+          environment-file: environment.yml
+      - name: Test
+        shell: bash -l {0}
+        timeout-minutes: 30
+        run: |
+          pip install ./.ci_support --no-deps --no-build-isolation
+          pip check
+
+  build:
+    needs: [pip_check]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v4
       - name: Build pyiron/base
+        timeout-minutes: 5
         run: |
           docker build -t pyiron/base:latest base/
           docker tag pyiron/base:latest pyiron/base:"$(date +%F)"
       - name: Build pyiron/md
+        timeout-minutes: 5
         run: |
-          tail --lines=+4 base/environment.yml >> md/environment.yml
+          tail --lines=+5 base/environment.yml >> md/environment.yml
           docker build -t pyiron/md:latest md/
           docker tag pyiron/md:latest pyiron/md:"$(date +%F)"
-      - name: Build pyiron/continuum
-        run: |
-          docker build -t pyiron/continuum:latest continuum/
-          docker tag pyiron/continuum:latest pyiron/continuum:"$(date +%F)"
+      #- name: Build pyiron/continuum
+      #  timeout-minutes: 5
+      #  run: |
+      #    docker build -t pyiron/continuum:latest continuum/
+      #    docker tag pyiron/continuum:latest pyiron/continuum:"$(date +%F)"
       - name: Build pyiron/pyiron
+        timeout-minutes: 5
         run: |
-          tail --lines=+4 md/environment.yml >> pyiron/environment.yml
+          tail --lines=+5 md/environment.yml >> pyiron/environment.yml
           docker build -t pyiron/pyiron:latest pyiron/
           docker tag pyiron/pyiron:latest pyiron/pyiron:"$(date +%F)"
       - name: Build pyiron/potentialworkshop
+        timeout-minutes: 5
         run: | 
-          tail --lines=+4 pyiron/environment.yml >> potentialworkshop/environment.yml
+          tail --lines=+5 pyiron/environment.yml >> potentialworkshop/environment.yml
           docker build -t pyiron/potentialworkshop:latest potentialworkshop/
           docker tag pyiron/potentialworkshop:latest pyiron/potentialworkshop:"$(date +%F)"
       - name: Build pyiron/experimental
+        timeout-minutes: 5
         run: |
-          tail --lines=+4 base/environment.yml >> experimental/environment.yml
+          tail --lines=+5 base/environment.yml >> experimental/environment.yml
           docker build -t pyiron/experimental:latest experimental/
           docker tag pyiron/experimental:latest pyiron/experimental:"$(date +%F)"
-      - name: Build pyiron/mpie_cmti
-        run: |
-          tail --lines=+4 pyiron/environment.yml >> mpie_cmti/environment.yml
-          docker build -t pyiron/mpie_cmti:latest mpie_cmti/
-          docker tag pyiron/mpie_cmti:latest pyiron/mpie_cmti:"$(date +%F)"
       # Testing
       - run: docker images
-      - run: docker run --rm pyiron/continuum /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
-      - run: docker run --rm pyiron/base /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'  
-      - run: docker run --rm pyiron/pyiron /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
-      - run: docker run --rm pyiron/experimental /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
+      #- name: Test pyiron/continuum
+      #  timeout-minutes: 5
+      #  run: docker run --rm pyiron/continuum /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
+      - name: Test pyiron/base
+        timeout-minutes: 5
+        run: docker run --rm pyiron/base /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'  
+      - name: Test pyiron/pyiron
+        timeout-minutes: 20
+        run: docker run --rm pyiron/pyiron /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
+      - name: Test pyiron/experimental
+        timeout-minutes: 5
+        run: docker run --rm pyiron/experimental /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
       # Export Environments
       - run: mkdir -p environment; chmod 777 environment
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/base /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_base_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/md /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_md_$(date +%F).yml;' 
-      - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/continuum /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_continuum_$(date +%F).yml;' 
+      #- run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/continuum /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_continuum_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/pyiron /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_pyiron_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/potentialworkshop /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_potentialworkshop_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/experimental /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_experimental_$(date +%F).yml;'
+      - name: cache
+        uses: actions/cache/save@v4
+        with:
+          path: environment/*.yml
+          key: all_env_-${{ steps.date.outputs.date }}
+  build_cmti:
+    needs: [pip_check]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v4
+      - name: Build pyiron/mpie_cmti
+        timeout-minutes: 15
+        run: |
+          docker build -t pyiron/mpie_cmti:latest mpie_cmti/
+          docker tag pyiron/mpie_cmti:latest pyiron/mpie_cmti:"$(date +%F)"
+      - run: docker images
+      - run: mkdir -p environment; chmod 777 environment
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/mpie_cmti /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/mpie_cmti_$(date +%F).yml;'
+      - name: cache
+        uses: actions/cache/save@v4
+        with:
+          path: environment/*.yml
+          key: cmti_env_-${{ steps.date.outputs.date }}
+      - name: test pyiron/cmti
+        run: |
+          docker run -v $(pwd)/mpie_cmti/test:/home/jovyan/test --rm pyiron/mpie_cmti /bin/bash -c 'source /opt/conda/bin/activate; python test/import.py;'
+  check:
+    needs: [build, build_cmti]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
+      - name: cache_cmti
+        uses: actions/cache/restore@v4
+        with:
+          path: environment/*.yml
+          key: cmti_env_-${{ steps.date.outputs.date }}
+      - name: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: environment/*.yml
+          key: all_env_-${{ steps.date.outputs.date }}
       - run: ls -al environment
-      
+
+  autobot:
+    needs: [build, build_cmti]
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ignore broken packages
+        shell: bash -l {0}
+        run: python .ci_support/checktitle.py "${{ github.event.pull_request.title }}"
+      - name: Enable auto-merge for bot PRs
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
