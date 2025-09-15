@@ -1,6 +1,6 @@
 pyiron==0.5.2
 pyiron-base==0.14.2
-pyiron-atomistics==0.7.17
+pyiron-atomistics==0.7.18
 pyiron-continuum==0.0.8
 pyiron-contrib==0.1.19
 pyiron-experimental==0.0.3
