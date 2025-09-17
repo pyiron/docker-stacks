@@ -33,5 +33,5 @@ netcdf4==1.7.2
 maxvolpy==0.3.8
 bokeh==3.8.0
 dscribe==2.1.1
-landau==1.3.4
+landau==1.3.5
 pycalphad==0.11.0
