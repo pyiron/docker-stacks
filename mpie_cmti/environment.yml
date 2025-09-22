@@ -44,6 +44,6 @@ dependencies:
 - sysroot_linux-64 =2.17
 - tensorflow =2.17.0
 - dscribe =2.1.1
-- landau =1.3.4
+- landau =1.4
 - backports.tarfile
 - pycalphad =0.11.0
