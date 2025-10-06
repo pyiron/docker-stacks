@@ -1,4 +1,4 @@
-ARG ROOT_IMAGE=quay.io/jupyter/base-notebook:82d322f00937 AS root_image
+ARG ROOT_IMAGE=quay.io/jupyter/base-notebook:b74418220768 AS root_image
 FROM $ROOT_IMAGE
 
 MAINTAINER Jan Janssen <janssen@mpie.de>, Marian Bruns <m.bruns@mpie.de>
