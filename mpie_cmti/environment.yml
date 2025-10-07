@@ -14,7 +14,7 @@ dependencies:
 - gpaw-data =0.9.20000
 - jupyter-server-proxy =4.4.0
 - jupyterhub =5.2.1
-- lammps =2023.08.02=*openmpi*
+- lammps =2024.08.29=*openmpi*_9
 - llama-index =0.14.4
 - matgl =1.1.2
 - maxvolpy =0.3.8
