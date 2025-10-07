@@ -47,4 +47,3 @@ dependencies:
 - dscribe =2.1.2
 - landau =1.4
 - backports.tarfile
-- pycalphad =0.11.0
