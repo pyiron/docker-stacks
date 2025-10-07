@@ -11,17 +11,18 @@ dependencies:
 - flux-core =0.64.0
 - git =2.46.0
 - gpaw =24.6.0=*openmpi*
+- gpaw-data =0.9.20000
 - jupyter-server-proxy =4.4.0
 - jupyterhub =5.2.1
 - lammps =2023.08.02=*openmpi*
-- llama-index =0.14.3
+- llama-index =0.14.4
 - matgl =1.1.2
 - maxvolpy =0.3.8
 - nbgitpuller =1.2.2
 - netcdf4 =1.7.2
 - nglview =3.1.4
 - mkl =2023.2.0
-- mlip =2.0
+- mlip =3.0
 - numba =0.60.0
 - openkim-models =2021.01.28
 - psycopg2 =2.9.9
@@ -46,4 +47,3 @@ dependencies:
 - dscribe =2.1.2
 - landau =1.4
 - backports.tarfile
-- pycalphad =0.11.0
