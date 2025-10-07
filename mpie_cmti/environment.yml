@@ -11,10 +11,11 @@ dependencies:
 - flux-core =0.64.0
 - git =2.46.0
 - gpaw =24.6.0=*openmpi*
+- gpaw-data =0.9.20000
 - jupyter-server-proxy =4.4.0
 - jupyterhub =5.2.1
 - lammps =2024.08.29=*openmpi*_9
-- llama-index =0.13.6
+- llama-index =0.14.4
 - matgl =1.1.2
 - maxvolpy =0.3.8
 - nbgitpuller =1.2.2
@@ -27,10 +28,10 @@ dependencies:
 - psycopg2 =2.9.9
 - pyiron =0.5.2
 - pyiron-data =0.0.30
-- pyiron_atomistics =0.7.17
-- pyiron_base =0.14.2
+- pyiron_atomistics =0.7.20
+- pyiron_base =0.15.1
 - pyiron_contrib =0.1.19
-- pyiron_potentialfit =0.3.11
+- pyiron_potentialfit =0.3.12
 - pyiron_workflow =0.13.3
 - pyiron_gui =0.0.12
 - pyironflow =0.0.20
@@ -43,7 +44,6 @@ dependencies:
 - structdbrest =0.0.1
 - sysroot_linux-64 =2.17
 - tensorflow =2.17.0
-- dscribe =2.1.1
-- landau =1.3.4
+- dscribe =2.1.2
+- landau =1.4
 - backports.tarfile
-- pycalphad =0.11.0
