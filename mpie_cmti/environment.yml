@@ -5,6 +5,7 @@ dependencies:
 - aimsgb =1.1.1
 - atomicrex =1.0.4
 - bader =1.0.5
+- bagofholding
 - bokeh =3.8.0
 - calphy =1.4.3
 - fitsnap3 =3.1.0.4
