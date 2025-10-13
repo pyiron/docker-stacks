@@ -18,8 +18,7 @@ dependencies:
 - fitsnap3 =3.1.0.4
 - flux-core =0.64.0
 - git =2.51.0
-- gpaw =24.6.0=*openmpi*
-- gpaw-data =0.9.20000
+- gpaw =25.1.0=*openmpi*
 - grace-tensorpotential =0.5.3  # [unix]
 - graphviz =12.0.0
 - h5io =0.2.5
