@@ -18,7 +18,6 @@ dependencies:
 - fitsnap3 =3.1.0.4
 - flux-core =0.64.0
 - git =2.51.0
-- gpaw =25.1.0=*openmpi*
 - grace-tensorpotential =0.5.3  # [unix]
 - graphviz =12.0.0
 - h5io =0.2.5
@@ -30,7 +29,6 @@ dependencies:
 - landau =1.4
 - llama-index =0.14.4
 - matgl =1.1.2
-- maxvolpy =0.3.8
 - nbgitpuller =1.2.2
 - netcdf4 =1.7.2
 - mamba =2.2.0
