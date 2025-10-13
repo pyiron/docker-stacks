@@ -2,48 +2,71 @@ channels:
 - conda-forge
 - nodefaults
 dependencies:
+- ase =3.26.0
 - aimsgb =1.1.1
+- assyst =0.8.0  # [unix]
+- atomistics =0.3.0
 - atomicrex =1.0.4
 - bader =1.0.5
+- black =25.1.0
 - bokeh =3.8.0
 - calphy =1.4.3
+- conda =25.7.0
+- conda-smithy =3.52.2
+- custodian =2025.8.13
+- executorlib =1.7.1
 - fitsnap3 =3.1.0.4
 - flux-core =0.64.0
-- git =2.46.0
+- git =2.51.0
 - gpaw =24.6.0=*openmpi*
 - gpaw-data =0.9.20000
+- grace-tensorpotential =0.5.3  # [unix]
+- graphviz =12.0.0
+- h5io =0.2.5
+- h5io_browser =0.2.3
+- iprpy-data =2023.07.25
 - jupyter-server-proxy =4.4.0
 - jupyterhub =5.2.1
-- lammps =2023.08.02=*openmpi*
+- lammps =2024.08.29=*openmpi*  # [unix]
+- landau =1.4
 - llama-index =0.14.4
 - matgl =1.1.2
 - maxvolpy =0.3.8
 - nbgitpuller =1.2.2
 - netcdf4 =1.7.2
+- mamba =2.2.0
+- matplotlib-base =3.10.6
+- mkl =2024.2.2  # [linux]
+- mpi4py =4.1.0
+- mypy =1.18.2
 - nglview =3.1.4
-- mkl =2023.2.0
 - mlip =3.0
-- numba =0.60.0
 - openkim-models =2021.01.28
-- psycopg2 =2.9.9
+- psycopg2 =2.9.10
+- pygraphviz =1.14
 - pyiron =0.5.2
 - pyiron-data =0.0.30
-- pyiron_atomistics =0.7.20
-- pyiron_base =0.15.1
+- pyiron_atomistics =0.8.1
+- pyiron_base =0.15.4
+- pyiron_snippets =1.0.1
 - pyiron_contrib =0.1.19
 - pyiron_potentialfit =0.3.12
-- pyiron_workflow =0.13.3
+- pyiron_workflow =0.15.3
 - pyiron_gui =0.0.12
 - pyironflow =0.0.20
-- python-ace =0.3.0
-- pytorch =2.1.2
-- pyxtal =1.0.9
+- pylammpsmpi =0.3.3
+- pymace =0.3.14  # [unix]
+- pysqa =0.3.2
+- python =3.12.10
+- python-ace =0.3.1 # [unix]
+- python-ternary =1.0.8
+- pytorch =2.5.1  # [unix]
+- pyxtal =1.1.1
+- qe =7.5  # [unix64]
 - runner =1.3
+- seaborn =0.13.2
 - sphinxdft =3.1
 - sqsgenerator =0.3
 - structdbrest =0.0.1
 - sysroot_linux-64 =2.17
-- tensorflow =2.17.0
-- dscribe =2.1.2
-- landau =1.4
-- backports.tarfile
+- tensorflow =2.18.0
