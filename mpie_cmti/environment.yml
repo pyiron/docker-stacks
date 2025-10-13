@@ -1,6 +1,7 @@
 name: base
 channels:
   - conda-forge
+  - nodefaults
 dependencies:
   - ase =3.26.0
   - assyst =0.8.0  # [unix]
