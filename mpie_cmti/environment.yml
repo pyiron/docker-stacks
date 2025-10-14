@@ -32,7 +32,7 @@ dependencies:
 - pyiron_base =0.15.1
 - pyiron_contrib =0.1.19
 - pyiron_potentialfit =0.3.12
-- pyiron_workflow =0.15.3
+- pyiron_workflow =0.15.4
 - pyiron_gui =0.0.12
 - pyironflow =0.0.20
 - python-ace =0.3.0
