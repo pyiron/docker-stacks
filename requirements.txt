@@ -34,3 +34,4 @@ maxvolpy==0.3.8
 bokeh==3.8.0
 dscribe==2.1.2
 landau==1.4
+assyst=0.8.1
