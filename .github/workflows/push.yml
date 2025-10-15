@@ -39,12 +39,6 @@ jobs:
           tail --lines=+5 pyiron/environment.yml >> potentialworkshop/environment.yml
           docker build -t pyiron/potentialworkshop:latest potentialworkshop/
           docker tag pyiron/potentialworkshop:latest pyiron/potentialworkshop:"$(date +%F)"
-      - name: Build pyiron/experimental
-        timeout-minutes: 5
-        run: |
-          tail --lines=+5 base/environment.yml >> experimental/environment.yml
-          docker build -t pyiron/experimental:latest experimental/
-          docker tag pyiron/experimental:latest pyiron/experimental:"$(date +%F)"
       # Publish
       - run: docker images
       - run: docker push pyiron/base:latest
@@ -55,15 +49,12 @@ jobs:
       - run: docker push pyiron/pyiron:"$(date +%F)"
       - run: docker push pyiron/potentialworkshop:latest
       - run: docker push pyiron/potentialworkshop:"$(date +%F)"
-      - run: docker push pyiron/experimental:latest
-      - run: docker push pyiron/experimental:"$(date +%F)"
       # Export Environments
       - run: mkdir -p environment; chmod 777 environment
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/base /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_base_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/md /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_md_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/pyiron /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_pyiron_$(date +%F).yml;' 
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/potentialworkshop /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_potentialworkshop_$(date +%F).yml;' 
-      - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/experimental /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_experimental_$(date +%F).yml;'
       - run: ls -al environment
       - name: cache
         uses: actions/cache/save@v4

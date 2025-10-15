@@ -17,7 +17,7 @@ jupyter-server-proxy==4.4.0
 nbgitpuller==1.2.2
 nglview==3.1.4
 pystem==0.0.26
-python-ace==0.3.0
+python-ace==0.3.1
 pyvista==0.44.2
 pyxem==0.20.0
 pyxtal==1.0.9
@@ -26,11 +26,10 @@ seaborn==0.13.2
 structdbrest==0.0.1
 temmeta==0.0.6
 vtk==9.2.6
-pytorch==2.1.2
+pytorch==2.3.1
 tensorflow==2.17.0
 llama-index==0.14.4
 netcdf4==1.7.2
-maxvolpy==0.3.8
 bokeh==3.8.0
 dscribe==2.1.2
 landau==1.4
