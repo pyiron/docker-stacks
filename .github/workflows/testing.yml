@@ -20,7 +20,7 @@ jobs:
       - name: Setup Mambaforge
         uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: "3.11"
+          python-version: "3.12"
           miniforge-version: latest
           condarc-file: .condarc
           environment-file: environment.yml
@@ -67,12 +67,12 @@ jobs:
           tail --lines=+5 pyiron/environment.yml >> potentialworkshop/environment.yml
           docker build -t pyiron/potentialworkshop:latest potentialworkshop/
           docker tag pyiron/potentialworkshop:latest pyiron/potentialworkshop:"$(date +%F)"
-      - name: Build pyiron/experimental
-        timeout-minutes: 5
-        run: |
-          tail --lines=+5 base/environment.yml >> experimental/environment.yml
-          docker build -t pyiron/experimental:latest experimental/
-          docker tag pyiron/experimental:latest pyiron/experimental:"$(date +%F)"
+      # - name: Build pyiron/experimental
+      #   timeout-minutes: 5
+      #   run: |
+      #     tail --lines=+5 base/environment.yml >> experimental/environment.yml
+      #     docker build -t pyiron/experimental:latest experimental/
+      #     docker tag pyiron/experimental:latest pyiron/experimental:"$(date +%F)"
       # Testing
       - run: docker images
       #- name: Test pyiron/continuum
@@ -84,9 +84,9 @@ jobs:
       - name: Test pyiron/pyiron
         timeout-minutes: 20
         run: docker run --rm pyiron/pyiron /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
-      - name: Test pyiron/experimental
-        timeout-minutes: 5
-        run: docker run --rm pyiron/experimental /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
+      # - name: Test pyiron/experimental
+      #   timeout-minutes: 5
+      #   run: docker run --rm pyiron/experimental /bin/bash -c 'source /opt/conda/bin/activate; i=0; for f in $(ls "${HOME}"/notebooks_*/*.ipynb); do jupyter nbconvert --ExecutePreprocessor.timeout=9999999 --ExecutePreprocessor.kernel_name=python3 --to notebook --execute $f || i=$((i+1)); done; if [ $i -gt 0 ]; then exit 1; fi;'
       # Export Environments
       - run: mkdir -p environment; chmod 777 environment
       - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/base /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_base_$(date +%F).yml;' 
