@@ -33,3 +33,4 @@ netcdf4==1.7.2
 bokeh==3.8.0
 dscribe==2.1.2
 landau==1.4
+assyst=0.8.1
