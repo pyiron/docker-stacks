@@ -4,3 +4,4 @@ channels:
 dependencies:
 - sphinxdft =3.1
 - gpaw =25.7.0=*openmpi*
+- openmpi =5.0.8
