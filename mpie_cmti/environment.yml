@@ -25,7 +25,7 @@ dependencies:
 - pyiron =0.5.2
 - pyiron-data =0.0.30
 - pyiron_atomistics =0.8.1
-- pyiron_base =0.15.3
+- pyiron_base =0.15.4
 - pyiron_contrib =0.1.19
 - pyiron_workflow =0.15.4
 - pyiron_gui =0.0.12
