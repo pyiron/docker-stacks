@@ -1,6 +1,6 @@
 pyiron==0.5.2
-pyiron-base==0.15.4
-pyiron-atomistics==0.8.1
+pyiron-base==0.15.7
+pyiron-atomistics==0.8.3
 pyiron-continuum==0.0.8
 pyiron-contrib==0.1.19
 pyiron-experimental==0.0.3
@@ -32,4 +32,4 @@ llama-index==0.14.7
 netcdf4==1.7.2
 bokeh==3.8.0
 dscribe==2.1.2
-landau==1.4
+landau==1.5.2
