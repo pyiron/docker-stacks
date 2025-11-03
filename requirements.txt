@@ -26,9 +26,9 @@ seaborn==0.13.2
 structdbrest==0.0.1
 temmeta==0.0.6
 vtk==9.2.6
-pytorch==2.5.1
-tensorflow==2.18.0
-llama-index==0.14.4
+pytorch==2.3.1
+tensorflow==2.17.0
+llama-index==0.14.7
 netcdf4==1.7.2
 bokeh==3.8.0
 dscribe==2.1.2
