@@ -5,7 +5,7 @@ dependencies:
 - aimsgb =1.1.1
 - atomicrex =1.0.4
 - bader =1.0.5
-- bokeh =3.8.0
+- bokeh =3.8.1
 - calphy =1.4.3
 - fitsnap3 =3.1.0.4
 - flux-core =0.78.0
@@ -13,7 +13,7 @@ dependencies:
 - jupyter-server-proxy =4.4.0
 - jupyterhub =5.2.1
 - lammps =2024.08.29=*openmpi*
-- llama-index =0.14.4
+- llama-index =0.14.7
 - nbgitpuller =1.2.2
 - netcdf4 =1.7.2
 - nglview =3.1.4
