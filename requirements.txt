@@ -32,4 +32,4 @@ llama-index==0.14.7
 netcdf4==1.7.2
 bokeh==3.8.1
 dscribe==2.1.2
-landau==1.4
+landau==1.5.2
