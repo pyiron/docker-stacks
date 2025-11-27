@@ -30,7 +30,7 @@ dependencies:
 - pyiron_atomistics =0.7.20
 - pyiron_base =0.15.1
 - pyiron_contrib =0.1.19
-- pyiron_potentialfit =0.3.13
+- pyiron_potentialfit =0.3.15
 - pyiron_workflow =0.13.3
 - pyiron_gui =0.0.12
 - pyironflow =0.0.20
