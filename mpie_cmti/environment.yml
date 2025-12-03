@@ -15,7 +15,7 @@ dependencies:
 - jupyter-server-proxy =4.4.0
 - jupyterhub =5.2.1
 - lammps =2024.06.27=*openmpi*
-- llama-index =0.14.7
+- llama-index =0.14.9
 - matgl =1.0.0
 - nbgitpuller =1.2.2
 - netcdf4 =1.7.2
