@@ -2,7 +2,7 @@ ARG ROOT_CONTAINER=pyiron/pyiron:latest
 ARG BASE_CONTAINER=$ROOT_CONTAINER
 FROM $BASE_CONTAINER
 
-MAINTAINER Jan Janssen <janssen@mpie.de>, Muhammad Hassani <hassani@mpie.de>
+LABEL org.opencontainers.image.authors="Jan Janssen <janssen@mpie.de>, Niklas Siemer <n.siemer@mpi-susmat.de>"
 
 USER $DOCKER_UID
 WORKDIR $HOME
