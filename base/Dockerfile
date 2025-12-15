@@ -2,7 +2,7 @@ ARG ROOT_CONTAINER=quay.io/jupyter/base-notebook:82d322f00937
 ARG BASE_CONTAINER=$ROOT_CONTAINER
 FROM $BASE_CONTAINER
 
-MAINTAINER Jan Janssen <janssen@mpie.de>, Niklas Siemer <n.siemer@mpi-susmat.de>
+LABEL org.opencontainers.image.authors="Jan Janssen <janssen@mpie.de>, Niklas Siemer <n.siemer@mpi-susmat.de>"
 
 USER root
 

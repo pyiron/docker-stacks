@@ -4,6 +4,7 @@ channels:
 dependencies:
 - pyiron =0.5.2
 - pyiron_atomistics =0.7.20
+- matscipy <1.2.0  # could be an indirect dependency of pyiron_atomistics, restrict to allow for a pip check passing environment build
 - pyiron-data =0.0.30
 - nglview =3.1.4
 - lammps =2024.06.27=*openmpi*
