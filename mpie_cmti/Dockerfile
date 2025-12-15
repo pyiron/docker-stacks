@@ -1,7 +1,7 @@
 ARG ROOT_IMAGE=quay.io/jupyter/base-notebook:82d322f00937 AS root_image
 FROM $ROOT_IMAGE
 
-MAINTAINER Jan Janssen <janssen@mpie.de>, Marian Bruns <m.bruns@mpie.de>
+LABEL org.opencontainers.image.authors="Jan Janssen <janssen@mpie.de>, Niklas Siemer <n.siemer@mpi-susmat.de>"
 
 ARG DOCKER_UID="1000"
 ARG DOCKER_GID="100"
