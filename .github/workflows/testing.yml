@@ -110,11 +110,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
-          repository: https://github.com/pyiron-workshop/DPG-tutorial-2025.git
+          repository: pyiron-workshop/DPG-tutorial-2025
           path: pyiron_workflow/DPG-tutorial-2025
       - uses: actions/checkout@v4
         with:
-          repository: https://github.com/samwaseda/tensile_test.git
+          repository: samwaseda/tensile_test
           path: pyiron_workflow/tensile_test
       - name: Build pyiron/pyiron_workflow
         timeout-minutes: 15
