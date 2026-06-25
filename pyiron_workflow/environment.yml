@@ -14,4 +14,4 @@ dependencies:
   - pip
   - pip:
     - git+https://github.com/pmrv/python-ace.git
-    - tensorpotential ==0.4.5
+    - tensorpotential ==0.5.9
