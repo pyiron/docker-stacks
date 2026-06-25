@@ -61,8 +61,43 @@ jobs:
         with:
           path: environment/*.yml
           key: all_env_${{ steps.date.outputs.date }}$
+  build_pyiron_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: https://github.com/pyiron-workshop/DPG-tutorial-2025.git
+          path: pyiron_workflow/DPG-tutorial-2025
+      - uses: actions/checkout@v4
+        with:
+          repository: https://github.com/samwaseda/tensile_test.git
+          path: pyiron_workflow/tensile_test
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: Build pyiron/pyiron_workflow
+        timeout-minutes: 10
+        run: |
+          docker build -t pyiron/pyiron_workflow:latest pyiron_workflow/
+          docker tag pyiron/pyiron_workflow:latest pyiron/pyiron_workflow:"$(date +%F)"
+      # Publish
+      - run: docker images
+      - run: docker push pyiron/pyiron_workflow:latest
+      - run: docker push pyiron/pyiron_workflow:"$(date +%F)"
+      # Export Environments
+      - run: mkdir -p environment; chmod 777 environment
+      - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/pyiron_workflow /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_workflow_$(date +%F).yml;'
+      - run: ls -al environment
+      - name: cache
+        uses: actions/cache/save@v4
+        with:
+          path: environment/*.yml
+          key: pyiron_workflow_env_${{ steps.date.outputs.date }}$
   release:
-    needs: [build]
+    needs: [build, build_pyiron_workflow]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -75,6 +110,11 @@ jobs:
           tag: ${{ steps.date.outputs.date }}
           tag_exists_error: false
           message: ""
+      - name: cache_cmti
+        uses: actions/cache/restore@v4
+        with:
+          path: environment/*.yml
+          key: pyiron_workflow_env_${{ steps.date.outputs.date }}$
       - name: cache
         uses: actions/cache/restore@v4
         with:
