@@ -4,7 +4,7 @@ channels:
 dependencies:
   - jupyterlab
   - numpy >1.20,<2
-  - ase =3.27.0
+  - ase =3.25.0
   - damask =3.0.2
   - requests =2.32.4
   - matplotlib
