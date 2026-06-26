@@ -39,7 +39,8 @@ ARG PYTHON_VERSION=default
 COPY . ${HOME}/
 RUN mamba env update -n base -f ${HOME}/environment.yml && \
     mamba clean --all -f -y && \
-    mamba list
+    mamba list && \
+    mv ${HOME}/pyiron_config ${HOME}/.pyiron
 
 # Fix permissions on /etc/jupyter as root
 USER root
