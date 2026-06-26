@@ -117,7 +117,7 @@ jobs:
           repository: samwaseda/tensile_test
           path: pyiron_workflow/tensile_test
       - name: Build pyiron/pyiron_workflow
-        timeout-minutes: 15
+        timeout-minutes: 30
         run: |
           docker build -t pyiron/pyiron_workflow:latest pyiron_workflow/
           docker tag pyiron/pyiron_workflow:latest pyiron/pyiron_workflow:"$(date +%F)"
