@@ -1,0 +1,5 @@
+libgl1
+cmake
+libglx-mesa0
+patch
+git
