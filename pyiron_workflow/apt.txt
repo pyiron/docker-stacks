@@ -1,7 +1,5 @@
 libgl1
 cmake
-gcc
-g++
 libglx-mesa0
 patch
 git
