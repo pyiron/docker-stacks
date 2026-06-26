@@ -3,6 +3,7 @@ channels:
   - nodefaults
 dependencies:
   - git =2.46.0
+  - gxx
   - pyiron 
   - pyiron_atomistics =0.7
   - pyiron-data =0.0.30
