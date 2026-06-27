@@ -4,7 +4,6 @@ channels:
 dependencies:
   - pyiron-data =0.0.30
   - nglview =3.1.4
-  - lammps =2024.06.27=*openmpi*
   - numpy >1.20,<2
   - ase =3.25.0
   - damask =3.0.2
