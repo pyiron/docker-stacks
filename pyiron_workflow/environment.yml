@@ -4,7 +4,7 @@ channels:
 dependencies:
   - pyiron-data =0.0.30
   - nglview =3.1.4
-  - sqlite>=3.45
+  - sqlalchemy =2.0.43
   - numpy >1.20,<2
   - ase =3.25.0
   - damask =3.0.2
