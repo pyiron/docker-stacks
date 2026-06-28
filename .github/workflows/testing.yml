@@ -100,6 +100,38 @@ jobs:
         with:
           path: environment/*.yml
           key: all_env_-${{ steps.date.outputs.date }}
+  build_pyiron_workflow:
+    needs: [pip_check]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%F)" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: pyiron-workshop/DPG-tutorial-2025
+          path: pyiron_workflow/DPG-tutorial-2025
+      - uses: actions/checkout@v4
+        with:
+          repository: samwaseda/tensile_test
+          path: pyiron_workflow/tensile_test
+      - name: Build pyiron/pyiron_workflow
+        timeout-minutes: 15
+        run: |
+          docker build -t pyiron/pyiron_workflow:latest pyiron_workflow/
+          docker tag pyiron/pyiron_workflow:latest pyiron/pyiron_workflow:"$(date +%F)"
+      - run: docker images
+      - run: mkdir -p environment; chmod 777 environment
+      - run: docker run -v $(pwd)/environment:/home/jovyan/ --rm pyiron/pyiron_workflow /bin/bash -c 'source /opt/conda/bin/activate; conda env export > /home/jovyan/pyiron_workflow_$(date +%F).yml;'
+      - name: cache
+        uses: actions/cache/save@v4
+        with:
+          path: environment/*.yml
+          key: pyiron_workflow_-${{ steps.date.outputs.date }}
+      - name: test pyiron/pyiron_workflow
+        run: |
+          docker run -v $(pwd)/pyiron_workflow/test:/home/jovyan/test --rm pyiron/pyiron_workflow /bin/bash -c 'source /opt/conda/bin/activate; python test/import.py;'
   check:
     needs: [build]
     runs-on: ubuntu-latest
