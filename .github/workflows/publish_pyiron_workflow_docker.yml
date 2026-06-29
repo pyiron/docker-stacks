@@ -27,7 +27,7 @@ jobs:
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Build pyiron/pyiron_workflow
-        timeout-minutes: 20
+        timeout-minutes: 40
         run: |
           docker build -t pyiron/pyiron_workflow:latest pyiron_workflow/
           docker tag pyiron/pyiron_workflow:latest pyiron/pyiron_workflow:"$(date +%F)"
