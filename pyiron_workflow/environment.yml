@@ -2,19 +2,29 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
-  - pyiron-data =0.0.30
+  - pip
   - nglview =3.1.4
+  - pyironflow =0.0.16
   - sqlite >=3.45
   - sqlalchemy =2.0.43
   - numpy >1.20,<2
+  - pyiron_atomistics =0.7
+  - pyiron-data =0.0.30
+  - pyiron_workflow =0.12.0
+  - calphy
   - ase =3.25.0
   - damask =3.0.2
+  - damask =3.0.2
+    damask damask-grid damask-mesh python-damask
   - requests =2.32.4
   - matplotlib
-  - pyiron_atomistics =0.7
-  - pyiron_workflow =0.12.0
-  - pyironflow =0.0.9
-  - pip
+  - matgl =1.1.3
+  - structuretoolkit =0.0.31
+  - pyxtal >=0.6.0,<1.1
+  - gpaw >=24, <25
+  - gpaw-data =0.9.20000
   - pip:
     - git+https://github.com/pmrv/python-ace.git
-    - tensorpotential ==0.4.5
+    - tensorpotential ==0.5.1
+    # - landaupkg ==1.0.1
+    - git+https://github.com/eisenforschung/landau.git
