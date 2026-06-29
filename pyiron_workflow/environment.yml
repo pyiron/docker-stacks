@@ -14,8 +14,6 @@ dependencies:
   - calphy
   - ase =3.25.0
   - damask =3.0.2
-  - damask =3.0.2
-    damask damask-grid damask-mesh python-damask
   - requests =2.32.4
   - matplotlib
   - matgl =1.1.3
