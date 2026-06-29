@@ -110,14 +110,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
+          repository: pyiron-node-store/dpg2025_node_store
+          path: pyiron_workflow/dpg2025_node_store
+      - uses: actions/checkout@v4
+        with:
           repository: pyiron-workshop/DPG-tutorial-2025
           path: pyiron_workflow/DPG-tutorial-2025
+      - run: mv pyiron_workflow/dpg2025_node_store/* pyiron_workflow/; rm -rf pyiron_workflow/dpg2025_node_store
       - uses: actions/checkout@v4
         with:
           repository: samwaseda/tensile_test
           path: pyiron_workflow/tensile_test
       - name: Build pyiron/pyiron_workflow
-        timeout-minutes: 15
+        timeout-minutes: 30
         run: |
           docker build -t pyiron/pyiron_workflow:latest pyiron_workflow/
           docker tag pyiron/pyiron_workflow:latest pyiron/pyiron_workflow:"$(date +%F)"
