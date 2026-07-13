@@ -13,5 +13,5 @@ python-ace==0.3.1
 pyvista==0.44.2
 pyxem==0.20.0
 temmeta==0.0.6
-vtk==9.2.6
+vtk==9.5.2
 pytorch==2.3.1
