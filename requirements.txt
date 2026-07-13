@@ -10,7 +10,7 @@ hyperspy==2.2.0
 nglview==3.1.4
 pystem==0.0.26
 python-ace==0.3.1
-pyvista==0.44.2
+pyvista==0.46.4
 pyxem==0.20.0
 temmeta==0.0.6
 vtk==9.2.6
